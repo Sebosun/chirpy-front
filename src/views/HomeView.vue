@@ -1,9 +1,17 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+<script lang="ts">
+import { Component, Vue } from 'vue-facing-decorator'
+import Chirps from '@/components/Chirps.vue'
+
+@Component({
+  components: {
+    Chirps
+  }
+})
+export default class HomeView extends Vue {}
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <Chirps />
   </main>
 </template>
