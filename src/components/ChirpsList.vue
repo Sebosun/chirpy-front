@@ -14,7 +14,7 @@ export default class Chirps extends Vue {
 
   async getChirps() {
     const url = 'http://localhost:8080/api'
-    const endPoint = 'chirps'
+    const endPoint = 'chirps?sort=desc'
     const response = await fetch(`${url}/${endPoint}`)
     this.chirps = (await response.json()) as Chirp[]
   }
