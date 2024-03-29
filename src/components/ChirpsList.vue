@@ -13,8 +13,8 @@ export default class Chirps extends Vue {
   chirps = [] as Chirp[]
 
   async getChirps() {
-    const url = 'http://localhost:8080'
-    const endPoint = 'api/chirps'
+    const url = 'http://localhost:8080/api'
+    const endPoint = 'chirps'
     const response = await fetch(`${url}/${endPoint}`)
     this.chirps = (await response.json()) as Chirp[]
   }
@@ -26,9 +26,20 @@ export default class Chirps extends Vue {
 </script>
 
 <template>
-  <div>
+  <div class="chirps-list">
     <div v-for="(chirp, index) in chirps" :key="index">
-      {{ chirp }}
+      <div class="chirps-list__post">
+        {{ chirp.body }}
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.chirps-list__post {
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: solid 1px #fff;
+  border-radius: 12px;
+}
+</style>

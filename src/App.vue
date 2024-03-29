@@ -1,4 +1,10 @@
 <template>
+  <header>
+    <nav>
+      <RouterLink to="/"> Main </RouterLink>
+      <RouterLink to="/login"> Login </RouterLink>
+    </nav>
+  </header>
   <RouterView />
 </template>
 
