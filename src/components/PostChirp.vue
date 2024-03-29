@@ -1,7 +1,13 @@
 <script lang="ts">
+import { useChirpStore } from '@/stores/chirpsStore'
 import { Component, Vue } from 'vue-facing-decorator'
+import { mapActions } from 'pinia'
 
-@Component
+@Component({
+  methods: {
+    ...mapActions(useChirpStore, ['fetchChirps'])
+  }
+})
 export default class PostChirps extends Vue {
   message = ''
 
@@ -22,6 +28,8 @@ export default class PostChirps extends Vue {
         body: JSON.stringify(payload)
       })
       this.message = ''
+      /* @ts-ignore */
+      this.fetchChirps()
     } catch (e) {
       console.error(e)
     }

@@ -1,26 +1,22 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-facing-decorator'
-
-type Chirp = {
-  id: number
-  body: string
-  author_id: number
-}
+import { useChirpStore } from '@/stores/chirpsStore'
+import { mapActions, storeToRefs } from 'pinia'
 // Define the component in class-style
-@Component
-export default class Chirps extends Vue {
-  // Class properties will be component data
-  chirps = [] as Chirp[]
 
-  async getChirps() {
-    const url = 'http://localhost:8080/api'
-    const endPoint = 'chirps?sort=desc'
-    const response = await fetch(`${url}/${endPoint}`)
-    this.chirps = (await response.json()) as Chirp[]
+@Component({
+  setup() {
+    const store = useChirpStore()
+    const { chirps } = storeToRefs(store)
+    return { chirps }
+  },
+  methods: {
+    ...mapActions(useChirpStore, ['fetchChirps'])
   }
-
+})
+export default class Chirps extends Vue {
   mounted() {
-    this.getChirps()
+    this.fetchChirps()
   }
 }
 </script>
